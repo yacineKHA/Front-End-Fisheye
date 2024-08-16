@@ -1,5 +1,5 @@
 function photographerTemplate(data) {
-    
+
     const { id, name, city, country, tagline, price, portrait } = data;
 
     const picture = `assets/photographers/${portrait}`;
@@ -15,6 +15,7 @@ function photographerTemplate(data) {
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
         const localisation = document.createElement( 'p' );
+        localisation.setAttribute("class", "photographer__localisation");
         localisation.textContent = `${city}, ${country}`;
         const taglineContent = document.createElement( 'p' );
         taglineContent.textContent = tagline;
@@ -25,6 +26,7 @@ function photographerTemplate(data) {
         article.appendChild(localisation);
         article.appendChild(taglineContent);
         article.appendChild(priceContent);
+        
         return (article);
     }
 

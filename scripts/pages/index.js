@@ -20,10 +20,11 @@ async function displayData(photographersData) {
 
 async function init() {
     const photographersData = await getPhotographers();
+    console.log("photo: ", photographersData);
     if (photographersData && photographersData.photographers) {
         displayData(photographersData.photographers);
     } else {
-        console.error("No photographers data found.");
+        console.error("Pas de photographes.");
     }
 }
 

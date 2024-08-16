@@ -15,11 +15,32 @@
   </header>
   <main id="main">
     <div class="photograph-header">
-        <div class="text-container"></div>
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-        <div class="image-container"></div>
-      </div>
+      <div class="text-container"></div>
+      <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+      <div class="image-container"></div>
+    </div>
+    <div class="photograph-portfolio">
+      
+    </div>
   </main>
+  <div id="gallery_modal">
+    <div class="gallery_modal__content">
+      <button class="gallery_modal__previous gallery_btn">
+        <img src="assets/icons/prev.png" alt="Previous" />
+      </button>
+      <div class="gallery_modal_main_container">
+        <div class="gallery_modal__media_container">
+        </div>
+        <p class="gallery_modal__title"></p>
+        <button class="gallery_modal__close-modal gallery_btn">
+          <img src="assets/icons/close.png" alt="Close" />
+        </button>
+      </div>
+      <button class="gallery_modal__next gallery_btn">
+        <img src="assets/icons/next.png" alt="Next" />
+      </button>
+    </div>
+  </div>
   <div id="contact_modal">
     <div class="modal">
       <header>
@@ -35,9 +56,18 @@
       </form>
     </div>
   </div>
+  <script src="scripts/utils/extractFileName.js"></script>
   <script src="scripts/utils/getPhotographers.js"></script>
+  <script src="scripts/utils/getPhotographerPortfolio.js"></script>
+  <script src="scripts/utils/galleryUtils.js"></script>
   <script src="/scripts/pages/photographer.js"></script>
   <script src="/scripts/utils/contactForm.js"></script>
+  <script src="/scripts/templates/gallery.js"></script>
+  <script src="/models/MediaFactory.js"></script>
+  <script src="/models/Photo.js"></script>
+  <script src="/models/Video.js"></script>
+
+
 </body>
 
 </html>

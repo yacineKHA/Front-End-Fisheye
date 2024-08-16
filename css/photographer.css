@@ -1,5 +1,13 @@
 #contact_modal {
     display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(121, 121, 121, 0.526);
 }
 
 .photograph-header {
@@ -77,3 +85,116 @@ form input {
     border: none;
     border-radius: 5px;
 }
+
+.photograph-portfolio {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.portfolio_card {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: 351px;
+    overflow: hidden;
+}
+
+.photographer__localisation {
+    color: #901C1C;
+}
+
+.card__img_link_container {
+    display: flex;
+    align-items: flex-end;
+    width: 350px;
+    height: 300px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.card__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+#gallery_modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+}
+
+.gallery_modal_main_container {
+    position: relative;
+}
+
+.gallery_modal__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gallery_modal__media_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1050px;
+    height: 900px;
+    overflow: hidden;
+}
+
+.gallery_modal__photo {
+    width: fit-content;
+    height: 100%;
+}
+
+.gallery_modal__video {
+    width: 100%;
+}
+
+.gallery_modal__title {
+    width: 100%;
+    font-size: 24px;
+    color: #901C1C;
+}
+
+.gallery_btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.gallery_modal__previous {
+    margin-right: 20px;
+
+}
+
+.gallery_modal__next {
+    margin-left: 20px;
+}
+
+.gallery_modal__close-modal {
+    position: absolute;
+    top: 10px;
+    right: -68px;
+    font-size: 36px;
+    cursor: pointer;
+    color: white;
+    cursor: pointer;
+}
+
