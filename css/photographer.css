@@ -32,6 +32,18 @@
     cursor: pointer;
 }
 
+#filter-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#sort-select {
+    background-color: #901C1C;
+    color: white;
+}
+
+
 .modal {
     border-radius: 5px;
     background-color: #DB8876;
@@ -90,6 +102,7 @@ form input {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    margin-bottom: 100px;
 }
 
 .portfolio_card {
@@ -125,6 +138,48 @@ form input {
     height: 100%;
     object-fit: cover;
     object-position: center;
+}
+
+.portfolio_card__bottom_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: 18px;
+    color: #901C1C;
+}
+
+.portfolio_card__likes_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.like-icon {
+    cursor: pointer;
+}
+
+#total-likes_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 376px;
+    height: 80px;
+    background-color:#DB8876;
+    color: black;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.total-likes__header {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
 #gallery_modal {

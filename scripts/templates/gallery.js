@@ -1,6 +1,8 @@
 function handleClickOnMediaItem(container, media, mediaItems) {
     container.addEventListener('click', () => {
         handleGallery(mediaItems, media);
+        console.log(`Clicked on ${media.fileName}`);
+
     });
 }
 
@@ -12,26 +14,12 @@ function handleGallery(mediaItems, media) {
     const previousButton = document.querySelector('.gallery_modal__previous');
     const nextButton = document.querySelector('.gallery_modal__next');
 
-    let currentIndex = mediaItems.findIndex(item => item.fileName === media.fileName);
+    let currentIndex = mediaItems.findIndex(item => item.title === media.title);
 
     function updateGallery(media) {
         mediaContainer.innerHTML = '';
-
-        if(media.type === 'Photo') {
-            const img = document.createElement('img');
-            img.setAttribute("class", "gallery_modal__photo");
-            img.setAttribute("src", media.fileName);
-            img.setAttribute("alt", media.title);
-            mediaContainer.appendChild(img);
-        } else if(media.type === 'Video') {
-            const video = document.createElement('video');
-            video.setAttribute("src", media.fileName);
-            video.setAttribute("class", "gallery_modal__video");
-            video.setAttribute("controls", "true");
-            video.setAttribute("autoplay", "true");
-            mediaContainer.appendChild(video);
-        }
-
+        const element = createMediaElementInGallery(media);
+        mediaContainer.appendChild(element);
         galleryTitle.textContent = media.title;
     }
 
@@ -48,5 +36,22 @@ function handleGallery(mediaItems, media) {
     });
 
     updateGallery(media);
+}
+
+function createMediaElementInGallery(media) {
+    let element;
+    if (media instanceof Photo) {
+        element = document.createElement('img');
+        element.setAttribute("class", "gallery_modal__photo");
+        element.setAttribute("src", media.fileName);
+        element.setAttribute("alt", media.title);
+    } else if (media instanceof Video) {
+        element = document.createElement('video');
+        element.setAttribute("src", media.fileName);
+        element.setAttribute("class", "gallery_modal__video");
+        element.setAttribute("controls", "true");
+        element.setAttribute("autoplay", "true");
+    }
+    return element;
 }
 

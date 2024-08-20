@@ -13,14 +13,24 @@
   <header>
     <img src="assets/images/logo.png" class="logo" />
   </header>
+
   <main id="main">
     <div class="photograph-header">
       <div class="text-container"></div>
       <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
       <div class="image-container"></div>
     </div>
+    <div id="filter-container">
+      <p>Trier par</p>
+      <div class="filter">
+        <select id="sort-select">
+          <option value="popularity">Popularité</option>
+          <option value="date">Date</option>
+          <option value="title">Titre</option>
+        </select>
+      </div>
+    </div>
     <div class="photograph-portfolio">
-      
     </div>
   </main>
   <div id="gallery_modal">
@@ -56,6 +66,14 @@
       </form>
     </div>
   </div>
+  <div id="total-likes_container">
+    <div class="total-likes__header">
+      <p class="total-likes"></p>
+      <img src="assets/icons/blackHeart.png" />
+    </div>
+    <p class="price-per-day"></p>
+
+  </div>
   <script src="scripts/utils/extractFileName.js"></script>
   <script src="scripts/utils/getPhotographers.js"></script>
   <script src="scripts/utils/getPhotographerPortfolio.js"></script>
@@ -66,6 +84,7 @@
   <script src="/models/MediaFactory.js"></script>
   <script src="/models/Photo.js"></script>
   <script src="/models/Video.js"></script>
+  <script src="/models/Photographer.js"></script>
 
 
 </body>

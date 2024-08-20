@@ -1,4 +1,7 @@
 class Photographer {
+
+    static totalLikes = 0;
+
     constructor({ name, id, city, country, tagline, price, portrait }) {
         this.name = name;
         this.id = id;
@@ -7,34 +10,22 @@ class Photographer {
         this.tagline = tagline;
         this.price = price;
         this.portrait = portrait;
+        this.totalLikes = 0;
     }
 
-    // Getters
-    getName() {
-        return this.name;
+    static incrementLikes(likes) {
+        this.totalLikes += likes;
+        this.updateTotalLikesDisplay();
     }
 
-    getId() {
-        return this.id;
+    static updateTotalLikesDisplay(resetTotalValue = false)  {
+        if(resetTotalValue) this.totalLikes = 0;
+        const totalLikesText = document.querySelector('.total-likes');
+        totalLikesText.textContent = `${this.totalLikes}`;
     }
 
-    getCity() {
-        return this.city;
-    }
-
-    getCountry() {
-        return this.country;
-    }
-
-    getTagline() {
-        return this.tagline;
-    }
-
-    getPrice() {
-        return this.price;
-    }
-
-    getPortrait() {
-        return this.portrait;
+    static updatePricePerDayDisplay(pricePerDay) {
+        const pricePerDayText = document.querySelector('.price-per-day');
+        pricePerDayText.textContent = `${pricePerDay}€/jour`;
     }
 }

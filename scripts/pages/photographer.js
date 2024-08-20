@@ -3,8 +3,6 @@ const urlParams = new URLSearchParams(window.location.search);
 const photographerId = urlParams.get('id');
 
 
-console.log("Photographer ID:", photographerId);
-
 async function getPhotographersData() {
     const photographers = await getPhotographers();
     if (photographers) {
@@ -13,7 +11,6 @@ async function getPhotographersData() {
         return [];
     }
 }
-
 
 function getPhotographerById(id, photographers) {
     return photographers.find(photographer => photographer.id == id);
@@ -27,7 +24,7 @@ function displayPhotographerDetails(photographer) {
     const img = document.createElement('img');
     img.setAttribute("src", picture);
     img.setAttribute("alt", photographer.name);
-    img.setAttribute("class", "photographer__profil-img");
+    img.classList.add("photographer__profil-img");
     const h2 = document.createElement('h2');
     h2.textContent = photographer.name;
     const localisation = document.createElement('p');
@@ -42,64 +39,145 @@ function displayPhotographerDetails(photographer) {
 }
 
 
-async function displayPhotographerPortfolio(name) {
+async function displayPhotographerPortfolio(photographer) {
+    const mediaItems = await getPhotographerPortfolio(photographer);
+    photographer.totalLikes = mediaItems.reduce((acc, media) => acc + media.likes, 0);
+
+    refreshPortfolioDisplay(mediaItems, photographer);
+    await handleSortSelect(photographer);
+    Photographer.updatePricePerDayDisplay(photographer.price);
+}
+
+
+function createMediaElementsOnPortfolio(linkContainer, media) {
     const portfolioContainer = document.querySelector('.photograph-portfolio');
-    const mediaItems = await getPhotographerPortfolio(name);
-    mediaItems.forEach(media => {
-        if (media.type === 'Photo') {
-            const container = document.createElement('div');
-            const linkContainer = document.createElement('a');
+    const container = createPortfolioCard();
+    const bottomContainer = createBottomContainer(media);
+    const mediaElement = createMediaElement(media);
 
-            handleClickOnMediaItem(linkContainer, media, mediaItems);
+    linkContainer.appendChild(mediaElement);
+    container.appendChild(linkContainer);
+    container.appendChild(bottomContainer);
+    portfolioContainer.appendChild(container);
+}
 
-            console.log(media);
-            const img = document.createElement('img');
-            const title = document.createElement('p');
-            title.textContent = media.title;
-            img.setAttribute("src", media.fileName);
-            img.setAttribute("alt", media.title);
-            img.setAttribute("class", "card__img");
-            linkContainer.setAttribute("class", "card__img_link_container");
-            title.setAttribute("class", "card__title");
-            linkContainer.appendChild(img);
-            container.setAttribute("class", "portfolio_card");
-            container.appendChild(linkContainer);
-            portfolioContainer.appendChild(container);
-            container.appendChild(title);
-        } else if (media.type === 'Video') {
-            const container = document.createElement('div');
-            const linkContainer = document.createElement('a');
-            handleClickOnMediaItem(linkContainer, media, mediaItems);
+function createPortfolioCard() {
+    const container = document.createElement('div');
+    container.classList.add("portfolio_card");
+    return container;
+}
 
-            const video = document.createElement('video');
-            const title = document.createElement('p');
-            title.textContent = media.title;
-            video.setAttribute("src", media.fileName);
-            video.setAttribute("controls", true);
-            video.setAttribute("class", "card__video");
-            video.preload = "auto";
-            video.controls = false;
-            linkContainer.setAttribute("class", "card__img_link_container");
-            linkContainer.appendChild(video);
-            container.setAttribute("class", "portfolio_card");
-            title.setAttribute("class", "card__title");
-            container.appendChild(linkContainer);
-            portfolioContainer.appendChild(container);
-            container.appendChild(title);
-        }
+function createBottomContainer(media, setTotalLikes) {
+    const bottomContainer = document.createElement('div');
+    bottomContainer.classList.add("portfolio_card__bottom_container");
+
+    const title = createTitle(media.title);
+    const likesContainer = createLikesContainer(media, setTotalLikes);
+
+    bottomContainer.appendChild(title);
+    bottomContainer.appendChild(likesContainer);
+
+    return bottomContainer;
+}
+
+function createTitle(titleText) {
+    const title = document.createElement('p');
+    title.classList.add("card__title");
+    title.textContent = titleText;
+    return title;
+}
+
+function createLikesContainer(media) {
+    const fragment = document.createDocumentFragment();
+    const likesContainer = document.createElement('div');
+    const likeIcon = document.createElement('img');
+    const numberOfLikes = document.createElement('p');
+
+    likesContainer.classList.add("portfolio_card__likes_container");
+    likeIcon.setAttribute("src", "../assets/icons/like.png");
+    likeIcon.setAttribute("alt", "like icon");
+    likeIcon.classList.add("like-icon");
+
+    numberOfLikes.classList.add("card__number_of_likes");
+    numberOfLikes.textContent = media.likes;
+
+    likeIcon.addEventListener('click', () => {
+        media.likes++;
+        const mediaFactory = new MediaFactory(); 
+        mediaFactory.incrementLikes();
+        numberOfLikes.textContent = media.likes;
     });
+
+    likesContainer.appendChild(numberOfLikes);
+    likesContainer.appendChild(likeIcon);
+    fragment.appendChild(likesContainer);
+
+    return fragment;
+}
+
+function createMediaElement(media) {
+    let element;
+    if (media instanceof Photo) {
+        element = document.createElement('img');
+        element.classList.add("card__img");
+        element.setAttribute("src", media.fileName);
+        element.setAttribute("alt", media.title);
+    } else if (media instanceof Video) {
+        element = document.createElement('video');
+        element.setAttribute("src", media.fileName);
+        element.setAttribute("controls", true);
+        element.classList.add("card__video");
+        element.preload = "auto";
+        element.controls = false;
+    }
+    return element;
+}
+
+async function handleSortSelect(photographer) {
+    const mediaItems = await getPhotographerPortfolio(photographer);
+    const sortSelect = document.getElementById('sort-select');
+
+    sortSelect.addEventListener('change', function () {
+        const selectedOption = this.value;
+        sortMedia(selectedOption, mediaItems);
+    });
+}
+
+function refreshPortfolioDisplay(mediaItems) {
+    const portfolioContainer = document.querySelector('.photograph-portfolio');
+    portfolioContainer.innerHTML = '';
+    Photographer.updateTotalLikesDisplay(true);
+    mediaItems.forEach(media => {
+        Photographer.incrementLikes(media.likes);
+        const linkContainer = document.createElement('a');
+        linkContainer.setAttribute("class", "card__img_link_container");
+        createMediaElementsOnPortfolio(linkContainer, media);
+        handleClickOnMediaItem(linkContainer, media, mediaItems);
+    });
+}
+
+function sortMedia(sortOption, mediaItems) {
+
+    const sortOptions = ['popularity', 'date', 'title'];
+
+    if (sortOption === sortOptions[0]) {
+        mediaItems.sort((a, b) => b.likes - a.likes);
+    } else if (sortOption === sortOptions[1]) {
+        mediaItems.sort((a, b) => new Date(b.date) - new Date(a.date));
+    } else if (sortOption === sortOptions[2]) {
+        mediaItems.sort((a, b) => a.title.localeCompare(b.title));
+    }
+    refreshPortfolioDisplay(mediaItems);
 }
 
 async function init() {
     const photographersData = await getPhotographersData();
     if (photographersData && photographersData.photographers) {
         const photographer = getPhotographerById(photographerId, photographersData.photographers);
-        console.log("Photographer:", photographer);
-
+        
         if (photographer) {
             displayPhotographerDetails(photographer);
-            console.log("name: ", photographer.name);
-            displayPhotographerPortfolio(photographer.name);
+            await displayPhotographerPortfolio(photographer);
         } else {
             console.error("Aucun photographe touvé.");
         }
@@ -109,8 +187,3 @@ async function init() {
 }
 
 init();
-
-
-
-//console.log("photographer: ", getPhotographerById(photographerId, getPhotographersData()))
-
