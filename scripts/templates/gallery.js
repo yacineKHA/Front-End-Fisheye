@@ -1,6 +1,13 @@
 function handleClickOnMediaItem(container, media, mediaItems) {
+
     container.addEventListener('click', () => {
         handleGallery(mediaItems, media);
+    });
+
+    container.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            handleGallery(mediaItems, media);
+        }
     });
 }
 
@@ -53,8 +60,16 @@ function createMediaElementInGallery(media) {
 }
 
 function closeGalleryModal(closeButton, galleryContainer) {
-    closeButton.addEventListener('click', () => {
+    const closeModal = () => {
         galleryContainer.style.display = "none";
+    };
+
+    closeButton.addEventListener('click', closeModal);
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            closeModal();
+        }
     });
 }
 

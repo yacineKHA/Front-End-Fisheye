@@ -155,6 +155,7 @@ function refreshPortfolioDisplay(mediaItems) {
         Photographer.incrementLikes(media.likes);
         const linkContainer = document.createElement('a');
         linkContainer.setAttribute("class", "card__img_link_container");
+        linkContainer.setAttribute('tabindex', '0');
         createMediaElementsOnPortfolio(linkContainer, media);
         handleClickOnMediaItem(linkContainer, media, mediaItems);
     });
