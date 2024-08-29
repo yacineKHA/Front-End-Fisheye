@@ -74,3 +74,11 @@ h1 {
     font-size: 9px;
     color: #757575;
 }
+
+.photographer_section article a {       
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}

@@ -11,7 +11,7 @@ function portfolioTemplate(data) {
         });
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture);
-        img.setAttribute("class", "photographer__profil-img")
+        img.setAttribute("class", "photographer__profil-img");
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
         const localisation = document.createElement( 'p' );

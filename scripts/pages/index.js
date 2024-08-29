@@ -1,5 +1,3 @@
-
-
 async function displayData(photographersData) {
     const photographersSection = document.querySelector(".photographer_section");
 
@@ -8,19 +6,15 @@ async function displayData(photographersData) {
             return new Photographer(photographerData)
         })
         .forEach(photographer => {
-            console.log("data: ", photographer);
 
             const photographerModel = photographerTemplate(photographer);
             const userCardDOM = photographerModel.getUserCardDOM();
-
-            
             photographersSection.appendChild(userCardDOM);
         });
 }
 
 async function init() {
     const photographersData = await getPhotographers();
-    console.log("photo: ", photographersData);
     if (photographersData && photographersData.photographers) {
         displayData(photographersData.photographers);
     } else {

@@ -1,4 +1,3 @@
-
 const urlParams = new URLSearchParams(window.location.search);
 const photographerId = urlParams.get('id');
 
@@ -25,11 +24,16 @@ function displayPhotographerDetails(photographer) {
     img.setAttribute("src", picture);
     img.setAttribute("alt", photographer.name);
     img.classList.add("photographer__profil-img");
+
     const h2 = document.createElement('h2');
     h2.textContent = photographer.name;
+
     const localisation = document.createElement('p');
+    localisation.classList.add("photograph-header__localisation");
     localisation.textContent = `${photographer.city}, ${photographer.country}`;
+
     const taglineContent = document.createElement('p');
+    taglineContent.classList.add("photograph-header__tagline");
     taglineContent.textContent = photographer.tagline;
 
     photographerDetails.appendChild(h2);
@@ -38,16 +42,15 @@ function displayPhotographerDetails(photographer) {
     photographerImage.appendChild(img);
 }
 
-
 async function displayPhotographerPortfolio(photographer) {
     const mediaItems = await getPhotographerPortfolio(photographer);
     photographer.totalLikes = mediaItems.reduce((acc, media) => acc + media.likes, 0);
 
+    sortMedia('popularity', mediaItems);
     refreshPortfolioDisplay(mediaItems, photographer);
     await handleSortSelect(photographer);
     Photographer.updatePricePerDayDisplay(photographer.price);
 }
-
 
 function createMediaElementsOnPortfolio(linkContainer, media) {
     const portfolioContainer = document.querySelector('.photograph-portfolio');
@@ -62,7 +65,7 @@ function createMediaElementsOnPortfolio(linkContainer, media) {
 }
 
 function createPortfolioCard() {
-    const container = document.createElement('div');
+    const container = document.createElement('article');
     container.classList.add("portfolio_card");
     return container;
 }
@@ -122,6 +125,7 @@ function createMediaElement(media) {
         element.classList.add("card__img");
         element.setAttribute("src", media.fileName);
         element.setAttribute("alt", media.title);
+        
     } else if (media instanceof Video) {
         element = document.createElement('video');
         element.setAttribute("src", media.fileName);
@@ -170,6 +174,11 @@ function sortMedia(sortOption, mediaItems) {
     refreshPortfolioDisplay(mediaItems);
 }
 
+function contactModalTitle (photographer) {
+    const title = document.querySelector("#contact_modal__title");
+    title.textContent =`Contactez moi ${photographer.name}`;
+}
+
 async function init() {
     const photographersData = await getPhotographersData();
     if (photographersData && photographersData.photographers) {
@@ -178,6 +187,7 @@ async function init() {
         if (photographer) {
             displayPhotographerDetails(photographer);
             await displayPhotographerPortfolio(photographer);
+            contactModalTitle(photographer)
         } else {
             console.error("Aucun photographe touvé.");
         }

@@ -1,8 +1,6 @@
 function handleClickOnMediaItem(container, media, mediaItems) {
     container.addEventListener('click', () => {
         handleGallery(mediaItems, media);
-        console.log(`Clicked on ${media.fileName}`);
-
     });
 }
 
@@ -31,9 +29,7 @@ function handleGallery(mediaItems, media) {
     navigationGallery(previousButton, nextButton, mediaItems, currentIndex, setCurrentIndex);
 
     galleryContainer.style.display = "flex";
-    closeButton.addEventListener('click', () => {
-        galleryContainer.style.display = "none";
-    });
+    closeGalleryModal(closeButton, galleryContainer);
 
     updateGallery(media);
 }
@@ -48,10 +44,17 @@ function createMediaElementInGallery(media) {
     } else if (media instanceof Video) {
         element = document.createElement('video');
         element.setAttribute("src", media.fileName);
+        element.setAttribute("alt", media.title);
         element.setAttribute("class", "gallery_modal__video");
         element.setAttribute("controls", "true");
         element.setAttribute("autoplay", "true");
     }
     return element;
+}
+
+function closeGalleryModal(closeButton, galleryContainer) {
+    closeButton.addEventListener('click', () => {
+        galleryContainer.style.display = "none";
+    });
 }
 
