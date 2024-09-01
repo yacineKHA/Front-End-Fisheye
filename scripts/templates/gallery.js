@@ -1,16 +1,3 @@
-function handleClickOnMediaItem(container, media, mediaItems) {
-
-    container.addEventListener('click', () => {
-        handleGallery(mediaItems, media);
-    });
-
-    container.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
-            handleGallery(mediaItems, media);
-        }
-    });
-}
-
 function handleGallery(mediaItems, media) {
     const galleryContainer = document.querySelector('#gallery_modal');
     const closeButton = document.querySelector('.gallery_modal__close-modal');
@@ -20,12 +7,18 @@ function handleGallery(mediaItems, media) {
     const nextButton = document.querySelector('.gallery_modal__next');
 
     let currentIndex = mediaItems.findIndex(item => item.title === media.title);
+    let lastFocusedElement = document.activeElement; // Sauvegarder l'élément actuellement focusé
 
     function updateGallery(media) {
-        mediaContainer.innerHTML = '';
+        mediaContainer.innerHTML = ''; //Vider media précédent
         const element = createMediaElementInGallery(media);
+        element.setAttribute('role', 'option');
+        element.setAttribute('aria-selected', 'true');
+        element.setAttribute('tabindex', '0');
+
         mediaContainer.appendChild(element);
         galleryTitle.textContent = media.title;
+        element.focus(); // Déplacer le focus vers l'image ouverte
     }
 
     function setCurrentIndex(newIndex) {
@@ -36,7 +29,7 @@ function handleGallery(mediaItems, media) {
     navigationGallery(previousButton, nextButton, mediaItems, currentIndex, setCurrentIndex);
 
     galleryContainer.style.display = "flex";
-    closeGalleryModal(closeButton, galleryContainer);
+    closeGalleryModal(closeButton, galleryContainer, lastFocusedElement);
 
     updateGallery(media);
 }
@@ -59,9 +52,12 @@ function createMediaElementInGallery(media) {
     return element;
 }
 
-function closeGalleryModal(closeButton, galleryContainer) {
+function closeGalleryModal(closeButton, galleryContainer, lastFocusedElement) {
     const closeModal = () => {
         galleryContainer.style.display = "none";
+        lastFocusedElement.focus(); // Restaurer le focus à l'élément qui a déclenché l'ouverture de la galerie
+        closeButton.removeEventListener('click', closeModal);
+        document.removeEventListener('keydown', handleEscapeKey);
     };
 
     closeButton.addEventListener('click', closeModal);

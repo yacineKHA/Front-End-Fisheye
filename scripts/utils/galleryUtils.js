@@ -35,3 +35,16 @@ function showNextMedia(currentIndex, setCurrentIndex, mediaItems) {
         setCurrentIndex(currentIndex += 1)
     }
 }
+
+function handleClickOnMediaItem(container, media, mediaItems) {
+
+    container.addEventListener('click', () => {
+        handleGallery(mediaItems, media);
+    });
+
+    container.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            handleGallery(mediaItems, media);
+        }
+    });
+}

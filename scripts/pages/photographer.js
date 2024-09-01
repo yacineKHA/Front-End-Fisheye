@@ -100,15 +100,32 @@ function createLikesContainer(media) {
     likeIcon.setAttribute("src", "../assets/icons/like.png");
     likeIcon.setAttribute("alt", "like icon");
     likeIcon.classList.add("like-icon");
+    likeIcon.setAttribute("tabindex", "0");
 
     numberOfLikes.classList.add("card__number_of_likes");
     numberOfLikes.textContent = media.likes;
 
-    likeIcon.addEventListener('click', () => {
-        media.likes++;
-        const mediaFactory = new MediaFactory(); 
-        mediaFactory.incrementLikes();
+    let isLiked = false;
+    const mediaFactory = new MediaFactory(); 
+
+    const toggleLike = () => {
+        if (isLiked) {
+            media.likes--;
+            mediaFactory.decrementLikes();
+        } else {
+            media.likes++;
+            mediaFactory.incrementLikes();
+        }
+        isLiked = !isLiked;
         numberOfLikes.textContent = media.likes;
+    };
+
+    likeIcon.addEventListener('click', toggleLike);
+
+    likeIcon.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            toggleLike();
+        }
     });
 
     likesContainer.appendChild(numberOfLikes);

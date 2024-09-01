@@ -54,7 +54,9 @@ header .logo {
     margin-top: 30px;
 }
 
-
+.contact_button:focus {
+    background-color: #DB8876;
+}
 
 #filter-container {
     display: flex;
@@ -160,7 +162,6 @@ textarea {
     flex-direction: column;
     width: 350px;
     height: 351px;
-    overflow: hidden;
 }
 
 .photographer__localisation {
@@ -237,8 +238,8 @@ textarea {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    right: 0;
+    bottom: 0;
     background-color: white;
     justify-content: center;
     align-items: center;
@@ -259,13 +260,15 @@ textarea {
     justify-content: center;
     align-items: center;
     width: 1050px;
-    height: 900px;
+    height: 700px;
     overflow: hidden;
 }
 
 .gallery_modal__photo {
-    width: fit-content;
-    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: center;
 }
 
 .gallery_modal__video {

@@ -36,12 +36,12 @@
     </div>
   </main>
   <div id="gallery_modal" aria-label="image closeup view">
-    <div class="gallery_modal__content" role="listbox">
+    <div class="gallery_modal__content">
       <button class="gallery_modal__previous gallery_btn" aria-label="Previous image">
         <img src="assets/icons/prev.png" alt="Previous image" />
       </button>
-      <div class="gallery_modal_main_container">
-        <div class="gallery_modal__media_container" role="option">
+      <div class="gallery_modal_main_container" >
+        <div class="gallery_modal__media_container">
         </div>
         <p class="gallery_modal__title"></p>
         <button class="gallery_modal__close-modal gallery_btn" aria-label="Close dialog">
@@ -57,17 +57,19 @@
     <div class="modal">
       <header>
         <h2 id="contact_modal__title"></h2>
-        <img id="contact_modal__close_modal" alt="Close Contact form" src="assets/icons/close.svg"/>
+        <img id="contact_modal__close_modal" alt="Close Contact form" src="assets/icons/close.svg" />
       </header>
       <form id="contact_form">
         <div>
           <label id="first_name_label" for="first_name">Prénom</label>
-          <input aria-labelledby="first_name_label" aria-errormessage="first_name_error" type="text" id="first_name" name="first_name">
+          <input aria-labelledby="first_name_label" aria-errormessage="first_name_error" type="text" id="first_name"
+            name="first_name">
           <span id="first_name_error" class="error-message"></span>
         </div>
         <div>
           <label id="last_name_label" for="last_name">Nom</label>
-          <input aria-labelledby="last_name_label" aria-errormessage="last_name_error" type="text" id="last_name" name="last_name">
+          <input aria-labelledby="last_name_label" aria-errormessage="last_name_error" type="text" id="last_name"
+            name="last_name">
           <span id="last_name_error" class="error-message"></span>
         </div>
         <div>
@@ -77,7 +79,9 @@
         </div>
         <div>
           <label id="your message" for="message">Message</label>
-          <textarea aria-labelledby="your message" aria-errormessage="message_error" id="message" name="message"></textarea>
+          <textarea aria-labelledby="your message" aria-errormessage="message_error" id="message"
+            name="message">
+          </textarea>
           <span id="message_error" class="error-message"></span>
         </div>
         <button aria-label="send" type="submit" class="contact_button">Envoyer</button>
@@ -87,7 +91,7 @@
   <div id="total-likes_container">
     <div class="total-likes__header">
       <p class="total-likes"></p>
-      <img alt="likes" src="assets/icons/blackHeart.png" />
+      <img alt="likes" src="assets/icons/blackHeart.png" tabindex="0" />
     </div>
     <p class="price-per-day"></p>
   </div>

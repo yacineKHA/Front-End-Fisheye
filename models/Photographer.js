@@ -18,8 +18,13 @@ class Photographer {
         this.updateTotalLikesDisplay();
     }
 
-    static updateTotalLikesDisplay(resetTotalValue = false)  {
-        if(resetTotalValue) this.totalLikes = 0;
+    static decrementLikes(likes) {
+        this.totalLikes -= likes;
+        this.updateTotalLikesDisplay();
+    }
+
+    static updateTotalLikesDisplay(resetTotalValue = false) {
+        if (resetTotalValue) this.totalLikes = 0;
         const totalLikesText = document.querySelector('.total-likes');
         totalLikesText.textContent = `${this.totalLikes}`;
     }

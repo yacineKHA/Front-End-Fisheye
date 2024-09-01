@@ -1,4 +1,4 @@
-function portfolioTemplate(data) {
+/*function portfolioTemplate(data) {
     
     const { name } = data;
 
@@ -29,4 +29,4 @@ function portfolioTemplate(data) {
     }
 
     return { getUserPortfolio }
-}
+}*/
