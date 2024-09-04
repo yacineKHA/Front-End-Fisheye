@@ -18,6 +18,7 @@ function handleGallery(mediaItems, media) {
 
         mediaContainer.appendChild(element);
         galleryTitle.textContent = media.title;
+        mediaContainer.focus();
         element.focus(); // Déplacer le focus vers l'image ouverte
     }
 

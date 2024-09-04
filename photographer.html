@@ -41,7 +41,7 @@
         <img src="assets/icons/prev.png" alt="Previous image" />
       </button>
       <div class="gallery_modal_main_container" >
-        <div class="gallery_modal__media_container">
+        <div class="gallery_modal__media_container" aria-live="polite">
         </div>
         <p class="gallery_modal__title"></p>
         <button class="gallery_modal__close-modal gallery_btn" aria-label="Close dialog">
@@ -95,11 +95,10 @@
     </div>
     <p class="price-per-day"></p>
   </div>
-  <script src="scripts/utils/getPhotographers.js"></script>
-  <script src="scripts/utils/getPhotographerPortfolio.js"></script>
+  <script src="scripts/utils/getPhotographersUtils.js"></script>
   <script src="scripts/utils/galleryUtils.js"></script>
   <script src="/scripts/pages/photographer.js"></script>
-  <script src="/scripts/utils/contactForm.js"></script>
+  <script src="/scripts/utils/contactFormUtils.js"></script>
   <script src="/scripts/templates/gallery.js"></script>
   <script src="/models/MediaFactory.js"></script>
   <script src="/models/Photo.js"></script>

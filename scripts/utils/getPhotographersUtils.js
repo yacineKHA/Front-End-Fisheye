@@ -1,3 +1,19 @@
+async function getPhotographers() {
+    const URL = "../../data/photographers.json";
+
+    try {
+        const response = await fetch(URL);
+        const json = await response.json();
+
+        if (json) {
+            return json;
+        }
+
+    } catch (error) {
+        console.log("respError: ", error)
+    }
+}
+
 async function getPhotographerPortfolio(photographer) {
     const URL = "../../data/photographers.json";
     const MEDIA_URL = "../../assets/photographers";
@@ -20,3 +36,15 @@ async function getPhotographerPortfolio(photographer) {
     }
 }
 
+async function getPhotographersData() {
+    const photographers = await getPhotographers();
+    if (photographers) {
+        return photographers;
+    } else {
+        return [];
+    }
+}
+
+function getPhotographerById(id, photographers) {
+    return photographers.find(photographer => photographer.id == id);
+}

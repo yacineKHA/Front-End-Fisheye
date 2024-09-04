@@ -1,20 +1,6 @@
 const urlParams = new URLSearchParams(window.location.search);
 const photographerId = urlParams.get('id');
 
-
-async function getPhotographersData() {
-    const photographers = await getPhotographers();
-    if (photographers) {
-        return photographers;
-    } else {
-        return [];
-    }
-}
-
-function getPhotographerById(id, photographers) {
-    return photographers.find(photographer => photographer.id == id);
-}
-
 function displayPhotographerDetails(photographer) {
     const photographerDetails = document.querySelector('.text-container');
     const photographerImage = document.querySelector('.image-container');
