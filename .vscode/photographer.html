@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+  <title>Fisheye - photographe </title>
+</head>
+
+<body>
+  <header>
+    <a href="/index.html">
+      <img src="assets/images/logo.png" alt="Fisheye Home page" class="logo" />
+    </a>
+  </header>
+
+  <main id="main">
+    <div class="photograph-header">
+      <div class="text-container"></div>
+      <button class="contact_button" aria-label="Contact Me">Contactez-moi</button>
+      <div class="image-container"></div>
+    </div>
+    <div id="filter-container">
+      <label for="sort-select" id="order-by">Trier par</label>
+      <div class="filter">
+        <select id="sort-select" aria-labelledby="order-by">
+          <option value="popularity">Popularité</option>
+          <option value="date">Date</option>
+          <option value="title">Titre</option>
+        </select>
+      </div>
+    </div>
+    <div class="photograph-portfolio">
+    </div>
+  </main>
+  <div id="gallery_modal" aria-label="image closeup view">
+    <div class="gallery_modal__content">
+      <button class="gallery_modal__previous gallery_btn" aria-label="Previous image">
+        <img src="assets/icons/prev.png" alt="Previous image" />
+      </button>
+      <div class="gallery_modal_main_container" >
+        <div class="gallery_modal__media_container" aria-live="polite">
+        </div>
+        <p class="gallery_modal__title"></p>
+        <button class="gallery_modal__close-modal gallery_btn" aria-label="Close dialog">
+          <img src="assets/icons/close.png" alt="Close dialog" />
+        </button>
+      </div>
+      <button class="gallery_modal__next gallery_btn" aria-label="Next image">
+        <img src="assets/icons/next.png" alt="Next image" />
+      </button>
+    </div>
+  </div>
+  <div id="contact_modal">
+    <div class="modal">
+      <header>
+        <h2 id="contact_modal__title"></h2>
+        <img id="contact_modal__close_modal" alt="Close Contact form" src="assets/icons/close.svg" />
+      </header>
+      <form id="contact_form">
+        <div>
+          <label id="first_name_label" for="first_name">Prénom</label>
+          <input aria-labelledby="first_name_label" aria-errormessage="first_name_error" type="text" id="first_name"
+            name="first_name">
+          <span id="first_name_error" class="error-message"></span>
+        </div>
+        <div>
+          <label id="last_name_label" for="last_name">Nom</label>
+          <input aria-labelledby="last_name_label" aria-errormessage="last_name_error" type="text" id="last_name"
+            name="last_name">
+          <span id="last_name_error" class="error-message"></span>
+        </div>
+        <div>
+          <label id="email_label" for="email">Email</label>
+          <input aria-labelledby="email_label" aria-errormessage="email_error" type="email" id="email" name="email">
+          <span id="email_error" class="error-message"></span>
+        </div>
+        <div>
+          <label id="your message" for="message">Message</label>
+          <textarea aria-labelledby="your message" aria-errormessage="message_error" id="message"
+            name="message">
+          </textarea>
+          <span id="message_error" class="error-message"></span>
+        </div>
+        <button aria-label="send" type="submit" class="contact_button">Envoyer</button>
+      </form>
+    </div>
+  </div>
+  <div id="total-likes_container">
+    <div class="total-likes__header">
+      <p class="total-likes"></p>
+      <img alt="likes" src="assets/icons/blackHeart.png" tabindex="0" />
+    </div>
+    <p class="price-per-day"></p>
+  </div>
+  <script src="scripts/utils/getPhotographersUtils.js"></script>
+  <script src="scripts/utils/galleryUtils.js"></script>
+  <script src="/scripts/pages/modals/contactForm.js"></script>
+  <script src="/scripts/pages/modals/gallery.js"></script>
+  <script src="/scripts/templates/portfolio.js"></script>
+  <script src="/scripts/templates/photographerDetails.js"></script>
+  <script src="/models/MediaFactory.js"></script>
+  <script src="/models/Photo.js"></script>
+  <script src="/models/Video.js"></script>
+  <script src="/models/Photographer.js"></script>
+  <script src="/scripts/pages/photographer.js"></script>
+
+</body>
+
+</html>
