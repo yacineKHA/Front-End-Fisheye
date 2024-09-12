@@ -1,12 +1,21 @@
 function displayModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "block";
+
+    const firstNameField = document.getElementById("first_name");
+    if (firstNameField) {
+        firstNameField.focus();
+    }
 }
 
 function closeModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
     clearForm();
+
+    // Permet de remettre le focus sur le bouton contact
+    const contactButton = document.querySelector(".contact_button");
+    contactButton.focus();
 }
 
 function clearForm() {
@@ -88,6 +97,14 @@ function contactModalTitle(photographer) {
     title.textContent = `Contactez moi ${photographer.name}`;
 }
 
+// Ferme la modal de contact en appuyant sur la touche "Escape"
+function escapeTocloseModal(event) {
+    if (event.key === "Escape") {
+        closeModal();
+    }
+}
+
 document.getElementById("contact_form").addEventListener("submit", submitForm);
 document.querySelector(".contact_button").addEventListener("click", displayModal);
 document.getElementById("contact_modal__close_modal").addEventListener("click", closeModal);
+document.addEventListener("keydown", escapeTocloseModal);
