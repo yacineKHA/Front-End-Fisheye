@@ -14,7 +14,8 @@ function handleGallery(mediaItems, media) {
         const element = createMediaElementInGallery(media);
         element.setAttribute('role', 'option');
         element.setAttribute('tabindex', '0');
-
+        element.setAttribute('aria-selected', 'true');
+        
         mediaContainer.appendChild(element);
         galleryTitle.textContent = media.title;
         element.focus(); // Déplacer le focus vers l'image ouverte
@@ -43,7 +44,7 @@ function createMediaElementInGallery(media) {
     } else if (media instanceof Video) {
         element = document.createElement('video');
         element.setAttribute("src", media.fileName);
-        element.setAttribute("alt", media.title);
+        element.setAttribute("aria-label", media.title);
         element.setAttribute("class", "gallery_modal__video");
         element.setAttribute("controls", "true");
         element.setAttribute("autoplay", "true");

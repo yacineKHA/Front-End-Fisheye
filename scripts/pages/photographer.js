@@ -26,10 +26,6 @@ async function displayPhotographerPortfolio(photographer) {
     Photographer.updatePricePerDayDisplay(photographer.price);
 }
 
-function displayGallery(){
-    
-}
-
 async function init() {
     const photographersData = await getPhotographersData();
     if (photographersData && photographersData.photographers) {

@@ -1,35 +1,4 @@
-/*function portfolioTemplate(data) {
-    
-    const { name } = data;
-
-    const media = `assets/photographers/${name}`;
-
-    function getUserPortfolio() {
-        const portfolioSection = 
-        article.addEventListener('click', () => {
-            window.location.href = `photographer.html?id=${id}`;
-        });
-        const img = document.createElement( 'img' );
-        img.setAttribute("src", picture);
-        img.setAttribute("class", "photographer__profil-img");
-        const h2 = document.createElement( 'h2' );
-        h2.textContent = name;
-        const localisation = document.createElement( 'p' );
-        localisation.textContent = `${city}, ${country}`;
-        const taglineContent = document.createElement( 'p' );
-        taglineContent.textContent = tagline;
-        const priceContent = document.createElement( 'p' );
-        priceContent.textContent = `${price}€/jour`;
-        article.appendChild(img);
-        article.appendChild(h2);
-        article.appendChild(localisation);
-        article.appendChild(taglineContent);
-        article.appendChild(priceContent);
-        return (article);
-    }
-
-    return { getUserPortfolio }
-}*/
+// Rassemble tous les éléments pour le portfolio et retourne le conteneur complet
 function createMediaElementsOnPortfolio(linkContainer, media) {
     const container = createPortfolioCard();
     const bottomContainer = createBottomContainer(media);
@@ -42,12 +11,14 @@ function createMediaElementsOnPortfolio(linkContainer, media) {
     return container;
 }
 
+// Crée un conteneur pour la card du portfolio
 function createPortfolioCard() {
     const container = document.createElement('article');
     container.classList.add("portfolio_card");
     return container;
 }
 
+// Crée le conteneur inférieur de la card du portfolio en y ajoutant titre et les likes
 function createBottomContainer(media, setTotalLikes) {
     const bottomContainer = document.createElement('div');
     bottomContainer.classList.add("portfolio_card__bottom_container");
@@ -61,6 +32,7 @@ function createBottomContainer(media, setTotalLikes) {
     return bottomContainer;
 }
 
+// Crée un titre pour la card du portfolio
 function createTitle(titleText) {
     const title = document.createElement('p');
     title.classList.add("card__title");
@@ -68,6 +40,7 @@ function createTitle(titleText) {
     return title;
 }
 
+// Crée le conteneur des likes avec l'icône et le nombre de likes
 function createLikesContainer(media) {
     const fragment = document.createDocumentFragment();
     const likesContainer = document.createElement('div');
@@ -113,6 +86,7 @@ function createLikesContainer(media) {
     return fragment;
 }
 
+// Crée un élément média (image ou vidéo) en fonction du type de média
 function createMediaElement(media) {
     let element;
     if (media instanceof Photo) {
@@ -132,6 +106,7 @@ function createMediaElement(media) {
     return element;
 }
 
+// Gère la sélection de tri et met à jour l'affichage du portfolio en fonction de l'option sélectionnée
 async function handleSortSelect(photographer) {
     const mediaItems = await getPhotographerPortfolio(photographer);
     const sortSelect = document.getElementById('sort-select');
@@ -142,6 +117,7 @@ async function handleSortSelect(photographer) {
     });
 }
 
+// Rafraîchit l'affichage du portfolio avec les card triés
 function refreshPortfolioDisplay(mediaItems) {
     const portfolioContainer = document.querySelector('.photograph-portfolio');
     portfolioContainer.innerHTML = '';
@@ -155,9 +131,9 @@ function refreshPortfolioDisplay(mediaItems) {
         portfolioContainer.appendChild(mediaElement);
         handleClickOnMediaItem(linkContainer, media, mediaItems);
     });
-
 }
 
+// Trie les card du portfolio en fonction de l'option de tri sélectionnée
 function sortMedia(sortOption, mediaItems) {
 
     const sortOptions = ['popularity', 'date', 'title'];
@@ -171,9 +147,3 @@ function sortMedia(sortOption, mediaItems) {
     }
     refreshPortfolioDisplay(mediaItems);
 }
-
-function contactModalTitle(photographer) {
-    const title = document.querySelector("#contact_modal__title");
-    title.textContent = `Contactez moi ${photographer.name}`;
-}
-

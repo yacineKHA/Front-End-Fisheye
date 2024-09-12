@@ -1,3 +1,4 @@
+// Gestions des événements de la galerie
 function navigationGallery(previousButton, nextButton, mediaItems, currentIndex, setCurrentIndex) {
     previousButton.addEventListener('click', () => {
         if (currentIndex > 0) {
