@@ -10,14 +10,14 @@ function createPhotographerImage(photographer) {
 
 // Crée un titre avec le nom du photographe
 function createPhotographerName(photographer) {
-    const h2 = document.createElement('h2');
-    h2.textContent = photographer.name;
-    return h2;
+    const h1 = document.createElement('h1');
+    h1.textContent = photographer.name;
+    return h1;
 }
 
 // Crée un paragraphe avec la localisation du photographe
 function createPhotographerLocation(photographer) {
-    const localisation = document.createElement('p');
+    const localisation = document.createElement('h2');
     localisation.classList.add("photograph-header__localisation");
     localisation.textContent = `${photographer.city}, ${photographer.country}`;
     return localisation;

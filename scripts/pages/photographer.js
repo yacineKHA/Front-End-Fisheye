@@ -30,7 +30,7 @@ async function init() {
     const photographersData = await getPhotographersData();
     if (photographersData && photographersData.photographers) {
         const photographer = getPhotographerById(photographerId, photographersData.photographers);
-        
+        console.log(photographer);
         if (photographer) {
             displayPhotographerDetails(photographer);
             await displayPhotographerPortfolio(photographer);

@@ -145,5 +145,5 @@ function sortMedia(sortOption, mediaItems) {
     } else if (sortOption === sortOptions[2]) {
         mediaItems.sort((a, b) => a.title.localeCompare(b.title));
     }
-refreshPortfolioDisplay(mediaItems);
+    refreshPortfolioDisplay(mediaItems);
 }

@@ -1,7 +1,5 @@
 class Photographer {
 
-    static totalLikes = 0;
-
     constructor({ name, id, city, country, tagline, price, portrait }) {
         this.name = name;
         this.id = id;

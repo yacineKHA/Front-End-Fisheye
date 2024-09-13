@@ -10,7 +10,7 @@ async function getPhotographers() {
         }
 
     } catch (error) {
-        console.log("respError: ", error)
+        console.error("respError: ", error)
     }
 }
 

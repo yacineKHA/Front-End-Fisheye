@@ -7,7 +7,7 @@ function photographerTemplate(data) {
         const link = document.createElement('a');
         const h2 = document.createElement('h2');
         const img = document.createElement('img');
-        const localisation = document.createElement('p');
+        const localisation = document.createElement('h3');
         const taglineContent = document.createElement('p');
         const priceContent = document.createElement('p');
 
